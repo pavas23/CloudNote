@@ -1,11 +1,8 @@
 import { Link ,useLocation} from "react-router-dom";
 import { useEffect } from "react";
 
-export default function () {
+export default function Navbar() {
     let location = useLocation();
-    // useEffect(()=>{
-    //     console.log(location.pathname);
-    // },[location]); // when location changes useEffect hook fires the callback function.
     return (
         <>
             <nav className="navbar navbar-expand-lg bg-dark navbar-dark">

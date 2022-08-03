@@ -1,8 +1,7 @@
-import {useContext} from "react";
-import Notes from "./Notes.js"
 
 
-export default function () {
+
+export default function AddNote() {
     return (
         <>
             <div className="container">
@@ -24,12 +23,8 @@ export default function () {
                     <button type="submit" className="btn btn-primary">Submit</button>
                 </form>
             </div>
-            <Notes/>
-
-
         </>
     );
 }
-
 
 
