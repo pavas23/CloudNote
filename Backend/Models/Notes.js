@@ -5,7 +5,7 @@ const notesSchema = new mongoose.Schema(
     {
         user:{
             type:mongoose.Schema.Types.ObjectId, // will take id from user model
-            ref:"user", // pass user model for ref.
+            ref:'user', // pass user model for ref.
         },
         title:{
             type:String,
