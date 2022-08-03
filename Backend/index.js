@@ -14,5 +14,5 @@ app.use("/api/auth", require("./Routes/auth.js"));
 app.use("/api/notes", require("./Routes/notes.js"));
 
 app.listen(port, () => {
-  console.log(`app successfully started at port:${port}`);
+  console.log(`CloudNote app successfully started at port:${port}`);
 });
