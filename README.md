@@ -1,12 +1,15 @@
-## CloudNote
-CloudNote is a full stack MERN web app which requires authentication and stores the user data in Mongo DB database after password hashing using bcryptjs. It 
-allows you to store your notes on cloud. Your notes are accessible from any device that can access the Internet.
-### Tech Stack
+# CloudNote
+CloudNote is a full stack MERN web app which requires authentication and stores the user data in Mongo DB database after password hashing using bcryptjs. It allows you to store your notes on cloud. Your notes are accessible from any device that can access the Internet.
 
-Mongo DB<br>
-Express JS<br>
-React JS<br>
-Node JS<br>
+## Tech Stack
+-   Mongo DB
+-   Express
+-   React
+-   Node JS
+-   HTML
+-   CSS
+-   JavaScript
+
 
 ## Installation
 
