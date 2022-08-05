@@ -8,6 +8,7 @@ CloudNote is a full stack MERN web app which requires authentication and stores 
 -   Node JS
 -   HTML
 -   CSS
+-   Bootstrap
 -   JavaScript
 
 
