@@ -1,11 +1,13 @@
 
 import Notes from "./Notes.jsx"
-
+import "../css/Home.css"
 
 export default function Home(props) {
     return (
         <>
-            <Notes showAlert = {props.showAlert}/>
+            <div id="homeparent">
+                <Notes showAlert={props.showAlert} />
+            </div>
         </>
     );
 }

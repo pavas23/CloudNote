@@ -3,6 +3,7 @@ import NoteContext from "../context/notes/NoteContext.jsx";
 import AddNote from "./AddNote.jsx";
 import Noteitem from "./Noteitem.jsx";
 import { useNavigate } from "react-router";
+import "../css/Notes.css"
 
 export default function Notes(props) {
     const context = useContext(NoteContext);
@@ -81,9 +82,9 @@ export default function Notes(props) {
             </div>
 
 
-            <div className="row my-3">
-                <h1>Your notes</h1>
-                {arr.length === 0 && "No Notes to display"}
+            <div className="row my-3" id="notescon">
+                <h2>Your Notes</h2>
+                {/* {arr.length === 0 && "No Notes to display"} */}
                 {arr.map((note) => {
                     return <Noteitem key={note._id} note={note} updateNote={updateNote} showAlert={props.showAlert} />;
                 })}

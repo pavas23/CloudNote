@@ -1,6 +1,7 @@
 
 import {useContext, useState} from "react";
-import NoteContext from "../context/notes/NoteContext.jsx"
+import NoteContext from "../context/notes/NoteContext.jsx";
+import "../css/AddNote.css";
 
 export default function AddNote() {
     const context = useContext(NoteContext);
@@ -27,16 +28,16 @@ export default function AddNote() {
     };
     return (
         <>
-            <div className="container">
-                <h1>Add your notes</h1>
-                <form>
+            <div className="container" id="addnotecon">
+                <h2>Add your Notes</h2>
+                <form autoComplete="off">
                     <div className="mb-3">
                         <label htmlFor="title" className="form-label">Title</label>
                         <input type="text" className="form-control" name = "title" id="title"  aria-describedby="emailHelp" onChange={onchange} />
                     </div>
                     <div className="mb-3">
                         <label htmlFor="exampleInputPassword1" className="form-label">Description</label>
-                        <input type="text" className="form-control" id="description"  name="description"onChange={onchange} />
+                        <textarea rows="4" type="text" className="form-control" id="description"  name="description"onChange={onchange} />
                     </div>
                     <div className="mb-3">
                         <label htmlFor="exampleInputPassword1" className="form-label">Tag</label>

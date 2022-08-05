@@ -15,11 +15,12 @@ export default function Noteitem(props) {
   return (
     <>
       <div className="col-md-3">
-        <div className="card my-3">
+        <div className="card my-3" style = {{height:"20vh",overflowY:"scroll",color:"black"}}>
           <div className="card-body">
-            <h5 className="card-title">{note.title}</h5>
+            <h5 className="card-title" style={{textTransform:"capitalize",fontSize:"1.2rem"}}>{note.title}</h5>
             <p className="card-text">{note.description}</p>
-            <i className="fa-solid fa-trash-can mx-2" onClick={handledelete}></i>
+            <p className="card-text">{note.tag}</p>
+            <i className="fa-solid fa-trash-can mx-2" onClick={handledelete}></i>&nbsp;&nbsp;
             <i className="fa-solid fa-file-pen" onClick= {handleupdate}></i>
           </div>
         </div>

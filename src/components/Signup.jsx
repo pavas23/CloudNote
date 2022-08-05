@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
+import "../css/Signup.css";
 
 export default function Signup(props) {
     const[credentials,setCredentials] = useState({name:"",email:"",password:"",cpassword:""});
@@ -38,26 +39,29 @@ export default function Signup(props) {
     };
     return (
         <>
-        <div className = "container">
-            <form onSubmit = {handlesubmit}>
-            <div className="mb-3">
+        <div id = "signupparent">
+        <div className = "container" id="signupcon">
+        <h2>Create Account to use CloudNote</h2>
+            <form onSubmit = {handlesubmit} id="signupform" autoComplete="off">
+            <div className="mb-0">
                     <label htmlFor="name" className="form-label">Name</label>
-                    <input type="text" className="form-control" name="name" onChange={onchange} id="name" aria-describedby="emailHelp"/>
+                    <input className="signinput" type="text"  name="name" onChange={onchange} id="name" required aria-describedby="emailHelp"/>
                 </div>
-                <div className="mb-3">
-                    <label htmlFor="email" className="form-label">Email address</label>
-                    <input type="email" className="form-control" name="email" onChange={onchange} id="email" aria-describedby="emailHelp"/>
+                <div className="mb-0">
+                    <label htmlFor="email" className="form-label">Email Address</label>
+                    <input  className="signinput" type="email"  name="email" onChange={onchange} id="email" required aria-describedby="emailHelp"/>
                 </div>
-                <div className="mb-3">
+                <div className="mb-0">
                     <label htmlFor="password" className="form-label">Password</label>
-                    <input type="password" className="form-control" name="password" onChange={onchange} id="password" required minLength={5}/>
+                    <input className="signinput" type="password"  name="password" onChange={onchange} id="password" required minLength={5}/>
                 </div>
-                <div className="mb-3">
+                <div className="mb-0">
                     <label htmlFor="cpassword" className="form-label">Confirm Password</label>
-                    <input type="password" className="form-control" name="cpassword" onChange={onchange} id="cpassword" required minLength={5}/>
+                    <input className="signinput" type="password" name="cpassword" onChange={onchange} id="cpassword" required minLength={5}/>
                 </div>
-                <button type="submit" className="btn btn-primary">Submit</button>
+                <button type="submit" id="signupbtn" className="btn btn-primary">Submit</button>
             </form>
+            </div>
             </div>
         </>
     );

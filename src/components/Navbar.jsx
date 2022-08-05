@@ -1,10 +1,11 @@
-import { Link ,useLocation} from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useNavigate } from "react-router";
+import "../css/Navbar.css";
 
 export default function Navbar() {
     let navigate = useNavigate();
     let location = useLocation();
-    const handleLogout = ()=>{
+    const handleLogout = () => {
         localStorage.removeItem("token");
         navigate("/login", { replace: true });
     }
@@ -18,19 +19,22 @@ export default function Navbar() {
                     </button>
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-                            <li className="nav-item">
-                                <Link className={`nav-link ${location.pathname=="/"?"active":""} ${!localStorage.getItem("token")?"disabled":""}`}  aria-current="page" to="/">Home</Link>
+                            <li className="nav-item mx-2">
+                                <Link className={`nav-link ${location.pathname == "/" ? "active" : ""} ${!localStorage.getItem("token") ? "disabled" : ""}`} aria-current="page" to="/">Home</Link>
                             </li>
-                            <li className="nav-item">
-                                <Link className={`nav-link ${location.pathname=="/about"?"active":""}`} to="/about">About</Link>
+                            {/* <li className="nav-item mx-2">
+                                <Link className={`nav-link ${location.pathname == "/about" ? "active" : ""}`} to="/about">About</Link>
+                            </li> */}
+                            <li className="nav-item mx-2">
+                                {!localStorage.getItem("token") ? <form className="d-flex" role="search">
+                                    <Link className={`nav-link mx-2 ${location.pathname == "/login" ? "active" : ""}`} to="/login" >Login</Link>
+                                    <Link className={`nav-link mx-2 ${location.pathname == "/signup" ? "active" : ""}`} to="/signup">Sign Up</Link>
+                                </form> : <Link className={`nav-link mx-2${location.pathname == "/signup" ? "active" : ""}`} onClick={handleLogout} to="/login">Logout</Link>}
                             </li>
                         </ul>
-                        {!localStorage.getItem("token")?<form className="d-flex" role="search">
-                        <Link className="btn btn-primary mx-3" to="/login" role="button">Login</Link>
-                        <Link className="btn btn-primary" to="/signup" role="button">Sign Up</Link>
-                        </form>:<button className="btn btn-primary" onClick={handleLogout} role="button">Logout</button>}
                     </div>
                 </div>
+
             </nav>
         </>
     );
