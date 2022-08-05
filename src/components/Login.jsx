@@ -45,7 +45,7 @@ export default function Login(props) {
                             <label htmlFor="exampleInputPassword1" className="form-label">Password</label><br />
                             <input type="password"   className="logininput" required value={credentials.password} name="password" autoComplete="off" id="exampleInputPassword1" onChange={onchange} />
                         </div>
-                        <button type="submit" id="loginbtn" className="btn btn-primary" >Submit</button>
+                        <button type="submit" id="loginbtn" className="btn btn-primary" >Login</button>
                     </form>
                 </div>
         </>

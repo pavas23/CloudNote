@@ -49,3 +49,17 @@ h2{
     margin-top: 2vh !important;
 }
 
+
+@media screen and (max-width:420px){
+    #logincon{
+        width: 80vw;
+    }
+    #loginbtn{
+        width: 40%;
+    }
+}
+@media screen and (max-height:800px){
+    #logincon{
+        height: 60vh;
+    }
+}

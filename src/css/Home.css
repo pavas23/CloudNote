@@ -9,3 +9,9 @@
 
 }
 
+@media screen and (max-height:760px){
+    #homeparent{
+        height: 110vh;
+    }
+}
+

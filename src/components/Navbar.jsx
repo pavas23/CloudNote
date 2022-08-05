@@ -18,7 +18,7 @@ export default function Navbar() {
                         <span className="navbar-toggler-icon"></span>
                     </button>
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+                        <ul className="navbar-nav me-auto mb-2 mb-lg-0" id="nav-list">
                             <li className="nav-item mx-2">
                                 <Link className={`nav-link ${location.pathname == "/" ? "active" : ""} ${!localStorage.getItem("token") ? "disabled" : ""}`} aria-current="page" to="/">Home</Link>
                             </li>
@@ -28,7 +28,7 @@ export default function Navbar() {
                             <li className="nav-item mx-2">
                                 {!localStorage.getItem("token") ? <form className="d-flex" role="search">
                                     <Link className={`nav-link mx-2 ${location.pathname == "/login" ? "active" : ""}`} to="/login" >Login</Link>
-                                    <Link className={`nav-link mx-2 ${location.pathname == "/signup" ? "active" : ""}`} to="/signup">Sign Up</Link>
+                                    <Link className={`nav-link mx-2 ${location.pathname == "/signup" ? "active" : ""}`} to="/signup">Sign up</Link>
                                 </form> : <Link className={`nav-link mx-2${location.pathname == "/signup" ? "active" : ""}`} onClick={handleLogout} to="/login">Logout</Link>}
                             </li>
                         </ul>

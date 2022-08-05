@@ -54,3 +54,20 @@ h2{
     width: 25%;
 }
 
+
+@media screen and (max-width:420px){
+    #signupcon{
+        width: 80vw;
+    }
+    #signupbtn{
+        width: 40%;
+    }
+}
+
+@media screen and (max-height:760px){
+    #signupcon{
+        height: 90vh;
+    }
+}
+
+
