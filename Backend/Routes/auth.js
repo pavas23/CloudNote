@@ -29,12 +29,12 @@ router.post("/createuser", [
         let success = false;
         //if user is not unique return the error as res
         if (user) {
-            return res.status(400).json({ error: "Sorry, a user with this email already exists" ,success:success});
+            return res.status(400).json({ error: "Sorry, a user with this email already exists", success: success });
         }
         // for generating salt from bcryptjs
         const salt = await bcryptjs.genSalt(10);
         // for hashing the password in body req and adding salt
-        const securedPassword = await bcryptjs.hash(req.body.password,salt);
+        const securedPassword = await bcryptjs.hash(req.body.password, salt);
         user = await User.create(
             {
                 name: req.body.name,
@@ -43,56 +43,56 @@ router.post("/createuser", [
             }
         )
         const data = {
-            user:{
-                id:user.id
+            user: {
+                id: user.id
             }
         }
-        const authtoken = jwt.sign(data,JWTSecret);
-        success =true;
-        res.json({success:success,authtoken:authtoken});
+        const authtoken = jwt.sign(data, JWTSecret);
+        success = true;
+        res.json({ success: success, authtoken: authtoken });
     } catch (err) {
         success = false;
         console.log(err.message);
-        res.status(500).send({success:success,error:"Internal Server Error"});
+        res.status(500).send({ success: success, error: "Internal Server Error" });
     }
 });
 
 //  Authenticate a user using : POST "/api/auth/login"
 //Route2
-router.post("/login",[
-    body("email","Enter a valid Email").isEmail(),
-    body("password","Password cannot be blank").exists(),
+router.post("/login", [
+    body("email", "Enter a valid Email").isEmail(),
+    body("password", "Password cannot be blank").exists(),
 
-],async (req,res)=>{
+], async (req, res) => {
     let success = false;
     // if there are errors return bad request
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
         return res.status(404).json({ errors: errors.array() });
     }
-    const{email,password} = req.body;
-    try{
-        let user = await User.findOne({email:email});
-        if(!user){
-            return res.status(400).json({error:"Please try to login with correct credentials",success:success});
+    const { email, password } = req.body;
+    try {
+        let user = await User.findOne({ email: email });
+        if (!user) {
+            return res.status(400).json({ error: "Please try to login with correct credentials", success: success });
         }
-        const passwordCompare = await bcryptjs.compare(password,user.password);
-        if(!passwordCompare){
-            return res.status(400).json({error:"Please try to login with correct credentials",success:success});
+        const passwordCompare = await bcryptjs.compare(password, user.password);
+        if (!passwordCompare) {
+            return res.status(400).json({ error: "Please try to login with correct credentials", success: success });
         }
         const data = {
-            user:{
-                id:user.id
+            user: {
+                id: user.id
             }
         }
-        const authtoken = jwt.sign(data,JWTSecret);
+        const authtoken = jwt.sign(data, JWTSecret);
         success = true;
-        res.json({success:success,authtoken:authtoken});
+        res.json({ success: success, authtoken: authtoken });
 
-    }catch(err){
-        success =false;
+    } catch (err) {
+        success = false;
         console.log(err.message);
-        res.status(500).send(success,"Internal Server Error");
+        res.status(500).send(success, "Internal Server Error");
     }
 
 
@@ -100,13 +100,13 @@ router.post("/login",[
 
 //Route3
 // get loged in user details using: POST "api/auth/getuser" Login Required
-router.post("/getuser",fetchuser,async (req,res)=>{
-    try{
+router.post("/getuser", fetchuser, async (req, res) => {
+    try {
         const userId = req.user.id;
-        const user = await User.findById(userId).select("-password"); 
+        const user = await User.findById(userId).select("-password");
         // to select all fields in docs except password
         res.send(user)
-    }catch(err){
+    } catch (err) {
         console.log(err.message);
         res.status(500).send("Internal Server Error");
     }

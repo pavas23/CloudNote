@@ -63,11 +63,11 @@ router.put("/updatenote/:id", fetchuser, async (req, res) => {
         if (note.user.toString() !== req.user.id) {
             return res.status(401).send("Not Allowed");
         }
-        note = await Notes.findByIdAndUpdate(req.params.id, {$set: newNote}, { new: true });
+        note = await Notes.findByIdAndUpdate(req.params.id, { $set: newNote }, { new: true });
         // new is used to create if any field didnt exist earlier
-        res.json({note});
+        res.json({ note });
 
-    } catch(err) {
+    } catch (err) {
         console.log(err.message);
         res.status(500).send("Internal Server Error");
     }
@@ -83,18 +83,15 @@ router.delete("/deletenote/:id", fetchuser, async (req, res) => {
         if (note.user.toString() !== req.user.id) {
             return res.status(401).send("Not Allowed");
         }
-        await Notes.deleteOne({_id:req.params.id});
+        await Notes.deleteOne({ _id: req.params.id });
         res.send("Note has been deleted");
 
-    } catch(err) {
+    } catch (err) {
         console.log(err.message);
         res.status(500).send("Internal Server Error");
     }
 
 });
-
-
-
 
 module.exports = router;
 
