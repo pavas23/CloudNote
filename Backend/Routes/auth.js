@@ -26,9 +26,10 @@ router.post("/createuser", [
     try {
         // creating the user
         let user = await User.findOne({ email: req.body.email });
+        let success = false;
         //if user is not unique return the error as res
         if (user) {
-            return res.status(400).json({ error: "Sorry, a user with this email already exists" });
+            return res.status(400).json({ error: "Sorry, a user with this email already exists" ,success:success});
         }
         // for generating salt from bcryptjs
         const salt = await bcryptjs.genSalt(10);
@@ -47,10 +48,12 @@ router.post("/createuser", [
             }
         }
         const authtoken = jwt.sign(data,JWTSecret);
-        res.json({authtoken:authtoken});
+        success =true;
+        res.json({success:success,authtoken:authtoken});
     } catch (err) {
+        success = false;
         console.log(err.message);
-        res.status(500).send("Internal Server Error");
+        res.status(500).send({success:success,error:"Internal Server Error"});
     }
 });
 
@@ -61,7 +64,7 @@ router.post("/login",[
     body("password","Password cannot be blank").exists(),
 
 ],async (req,res)=>{
-
+    let success = false;
     // if there are errors return bad request
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -71,11 +74,11 @@ router.post("/login",[
     try{
         let user = await User.findOne({email:email});
         if(!user){
-            return res.status(400).json({error:"Please try to login with correct credentials"});
+            return res.status(400).json({error:"Please try to login with correct credentials",success:success});
         }
         const passwordCompare = await bcryptjs.compare(password,user.password);
         if(!passwordCompare){
-            return res.status(400).json({error:"Please try to login with correct credentials"});
+            return res.status(400).json({error:"Please try to login with correct credentials",success:success});
         }
         const data = {
             user:{
@@ -83,11 +86,13 @@ router.post("/login",[
             }
         }
         const authtoken = jwt.sign(data,JWTSecret);
-        res.json({authtoken:authtoken});
+        success = true;
+        res.json({success:success,authtoken:authtoken});
 
     }catch(err){
+        success =false;
         console.log(err.message);
-        res.status(500).send("Internal Server Error");
+        res.status(500).send(success,"Internal Server Error");
     }
 
 

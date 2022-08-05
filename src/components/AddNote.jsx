@@ -1,30 +1,57 @@
 
-
+import {useContext, useState} from "react";
+import NoteContext from "../context/notes/NoteContext.jsx"
 
 export default function AddNote() {
+    const context = useContext(NoteContext);
+    const{addNote} = context;
+    const[note,setNote] = useState({
+        title:"",
+        description:"",
+        tag:""
+    });
+    const handleclick = (event)=>{
+        event.preventDefault();
+        addNote(note.title,note.description,note.tag);
+        document.getElementById("tag").value = "";
+        document.getElementById("title").value = "";
+        document.getElementById("description").value = "";
+        setNote({
+            title:"",
+            description:"",
+            tag:""
+        })
+    };
+    const onchange = (event)=>{
+        setNote({...note,[event.target.name]:event.target.value}); // spread operator will keep original value intact and update the value accordingly
+    };
     return (
         <>
             <div className="container">
                 <h1>Add your notes</h1>
                 <form>
                     <div className="mb-3">
-                        <label htmlFor="exampleInputEmail1" className="form-label">Email address</label>
-                        <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
-                        <div id="emailHelp" className="form-text">We'll never share your email with anyone else.</div>
+                        <label htmlFor="title" className="form-label">Title</label>
+                        <input type="text" className="form-control" name = "title" id="title"  aria-describedby="emailHelp" onChange={onchange} />
                     </div>
                     <div className="mb-3">
-                        <label htmlFor="exampleInputPassword1" className="form-label">Password</label>
-                        <input type="password" className="form-control" id="exampleInputPassword1" />
+                        <label htmlFor="exampleInputPassword1" className="form-label">Description</label>
+                        <input type="text" className="form-control" id="description"  name="description"onChange={onchange} />
                     </div>
-                    <div className="mb-3 form-check">
-                        <input type="checkbox" className="form-check-input" id="exampleCheck1" />
-                        <label className="form-check-label" htmlFor="exampleCheck1">Check me out</label>
+                    <div className="mb-3">
+                        <label htmlFor="exampleInputPassword1" className="form-label">Tag</label>
+                        <input type="text" className="form-control" id="tag"  name="tag"onChange={onchange} />
                     </div>
-                    <button type="submit" className="btn btn-primary">Submit</button>
+                    <button type="submit" disabled= {note.title.length<5 || note.description.length<5} className="btn btn-primary" onClick ={handleclick}>Add note</button>
                 </form>
             </div>
         </>
     );
 }
+
+
+
+
+
 
 
